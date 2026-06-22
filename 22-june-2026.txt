@@ -1,0 +1,64 @@
+https://leetcode.com/problems/middle-of-the-linked-list/description/
+876. Middle of the Linked List
+TC :O(N)
+SC :O(1)
+
+code:
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode fast=head;
+        ListNode slow=head;
+
+        while(fast!=null && fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        return slow;
+    }
+}
+
+
+
+https://leetcode.com/problems/reverse-linked-list/
+206. Reverse Linked List
+TC :O(N)
+SC :O(1)
+
+code:
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode curr=head;
+        ListNode prev=null;
+
+        while(curr!=null){
+            ListNode temp=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=temp;
+        }
+        return prev;
+    }
+}
+
+https://leetcode.com/problems/linked-list-cycle/
+141. Linked List Cycle
+TC :O(N)
+SC :O(1)
+
+code:
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+
+        while(slow!=null && fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
+}
