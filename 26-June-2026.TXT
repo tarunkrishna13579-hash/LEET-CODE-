@@ -1,0 +1,58 @@
+https://leetcode.com/problems/merge-two-sorted-lists
+✅ 21. Merge Two Sorted Lists
+ ⏱️ Time Complexity: O(M+N) | Space Complexity: O(1) 
+CODE:
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode dummy=new ListNode(-1);
+        ListNode curr=dummy;
+
+        while(list1!=null && list2!=null){
+            if(list1.val <=list2.val){
+                curr.next=list1;
+                list1=list1.next;
+            }
+            else{
+                curr.next=list2;
+                list2=list2.next;
+            }
+            curr=curr.next;
+        }
+        if(list1!=null){
+            curr.next=list1;
+            list1=list1.next;
+        }
+        if(list2!=null){
+        curr.next=list2;
+        list2=list2.next;
+        }
+        return dummy.next;
+    }
+}
+
+https://leetcode.com/problems/rotate-list
+✅ 61. Rotate List
+ ⏱️ Time Complexity:  O(N) | Space Complexity: O(1)
+CODE:
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null || head.next==null || k==0) return head;
+        ListNode curr=head;
+        int length=1;
+        while(curr.next!=null){
+            length++;
+            curr=curr.next;
+        }
+        curr.next=head;
+        k=k%length;
+        int steps=length-k;
+        ListNode tail=head;
+        for(int i=1;i<steps;i++){
+            tail=tail.next;
+        }
+        ListNode newHead=tail.next;
+        tail.next=null;
+
+        return newHead;
+    }
+}
