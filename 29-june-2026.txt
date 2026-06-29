@@ -1,0 +1,160 @@
+https://leetcode.com/problems/implement-stack-using-queues
+✅ 225. Implement Stack using Queues
+ ⏱️ Time Complexity: O(1) | Space Complexity: O(N) 
+
+CODE:
+class MyStack {
+   Stack <Integer>st;
+    public MyStack() {
+        st=new Stack<>();
+
+    }
+    
+    public void push(int x) {
+        st.push(x);
+    }
+    
+    public int pop() {
+      return   st.pop();
+    }
+    
+    public int top() {
+       return  st.peek();
+    }
+    
+    public boolean empty() {
+        return st.isEmpty();
+    }
+}
+
+
+https://leetcode.com/problems/implement-queue-using-stacks
+✅ 232. Implement Queue using Stacks
+ ⏱️ Time Complexity:  O(N) | Space Complexity: O(N)
+
+CODE:
+class MyQueue {
+    Queue<Integer>qu;
+    public MyQueue() {
+        qu=new ArrayDeque<>();
+    }
+    
+    public void push(int x) {
+         qu.offer(x);
+    }
+    
+    public int pop() {
+        return qu.poll();
+    }
+    
+    public int peek() {
+        return qu.peek();
+    }
+    
+    public boolean empty() {
+        return qu.isEmpty();
+    }
+}
+
+
+
+
+
+
+
+WHOLE BACKGROUND IMPLEMENTATION - ( ECLIPSE )
+
+package Stack;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+
+public class StackUsingQueue {
+	Queue<Integer>qu=new ArrayDeque<>();
+	public void offer(int x) {
+		qu.offer(x);
+		int size=qu.size();
+		while(size>1) {
+			qu.offer(qu.poll());
+			size--;
+		}
+	}
+	public int  poll() {
+		return qu.poll();
+	}
+	public int top() {
+	   return qu.peek();
+	}
+	 public void display() {
+	        System.out.println(qu);
+	    }
+	 
+	public static void main(String[] args) {
+		StackUsingQueue qu=new StackUsingQueue();
+		qu.offer(8);
+		qu.offer(4);
+		qu.offer(6);
+		qu.offer(5);
+		
+		qu.display();
+		
+		qu.poll();
+		qu.display();
+		System.out.println(qu.top());
+		
+	}
+
+}
+
+
+
+=====================================================================================
+
+
+
+package Stack;
+
+import java.util.Stack;
+
+public class QueueUsingStack {
+	Stack<Integer>st1=new Stack<>();
+	Stack<Integer>st2=new Stack<>();
+	
+	public void push(int x) {
+		
+		
+		while(!st1.isEmpty()) {
+			st2.push(st1.pop());
+		}
+		st1.push(x);
+		while(!st2.isEmpty()) {
+			st1.push(st2.pop());
+		}
+	}
+	public int pop() {
+		return st1.pop();
+	}
+	public int top() {
+		return st1.peek();
+	}
+	
+	public void display() {
+		System.out.print(st1);
+	}
+	
+	public static void main(String[] args) {
+		QueueUsingStack st=new QueueUsingStack();
+		st.push(7);
+		st.push(8);
+		st.push(9);
+		st.push(2);
+		st.display();
+		System.out.println();
+		st.pop();
+		st.display();
+		System.out.println();
+		System.out.println(st.top());
+	}
+
+}
+
