@@ -1,0 +1,69 @@
+https://leetcode.com/problems/valid-parentheses/
+✅ 20. Valid Parentheses
+ ⏱️ Time Complexity: O(N) | Space Complexity: O(N) 
+
+CODE:
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character>st=new Stack<>();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='(' || s.charAt(i)=='{' || s.charAt(i)=='[' ){
+                st.push(s.charAt(i));
+            }
+            else{
+                if(st.isEmpty()) return false;
+                if((s.charAt(i)==']' && st.peek()=='[') || 
+                    (s.charAt(i)==')' && st.peek()=='(') ||
+                    (s.charAt(i)=='}' && st.peek()=='{'))
+                {
+                    st.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return st.isEmpty();
+    }
+}
+
+
+https://leetcode.com/problems/min-stack/
+✅ 155. Min Stack
+ ⏱️ Time Complexity:  O(1) | Space Complexity: O(N)
+
+CODE:
+class MinStack {
+    Stack<Integer>st;
+    Stack<Integer>minStack;
+    public MinStack() {
+        st=new Stack<>();
+        minStack= new Stack<>();
+    }
+    
+    public void push(int value) {
+        st.push(value);
+
+        if(minStack.isEmpty() || value<=minStack.peek()){
+            minStack.push(value);
+        }
+    }
+    
+    public void pop() {
+        if(minStack.isEmpty()){
+            return;
+        }
+        int removed=st.pop();
+        if(removed==minStack.peek()){
+            minStack.pop();
+        }
+    }
+    
+    public int top() {
+        return st.peek();
+    }
+    
+    public int getMin() {
+        return minStack.peek();
+    }
+}
