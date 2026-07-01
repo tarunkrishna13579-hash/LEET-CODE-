@@ -1,0 +1,54 @@
+https://leetcode.com/problems/next-greater-element-i/
+✅ 496. Next Greater Element I
+ ⏱️ Time Complexity: O(M+N) | Space Complexity: O(N) 
+CODE:
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] ans=new  int[nums1.length];
+        Stack<Integer>st=new Stack<>();
+        HashMap<Integer,Integer>hm=new HashMap<>();
+        for(int i=0;i<nums2.length;i++){
+            while(!st.isEmpty() && nums2[i]>st.peek()){
+                hm.put(st.pop(),nums2[i]);
+            }
+            st.push(nums2[i]);
+        }
+        while(!st.isEmpty()){
+            hm.put(st.pop(),-1);
+        }
+
+        for(int i=0;i<nums1.length;i++){
+            ans[i]=hm.get(nums1[i]);
+        }
+        return ans;
+    }
+}
+
+https://leetcode.com/problems/next-greater-element-ii/
+✅ 503. Next Greater Element II
+ ⏱️ Time Complexity:  O(N) | Space Complexity: O(N)
+
+CODE:
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        Stack<Integer> st = new Stack<>();
+        int n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+
+        for (int i = 0; i < 2 * n; i++) {
+            int index = i % n;
+
+            while (!st.isEmpty() && nums[index] > nums[st.peek()]) {
+                int storedIndex = st.pop();
+                ans[storedIndex] = nums[index];
+            }
+
+            if (i < n) {
+                st.push(index);
+            }
+        }
+
+        return ans;
+    }
+}
